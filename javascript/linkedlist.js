@@ -7,12 +7,29 @@ class ListNode {
         this.next = next;
     }
 
-    //getter
-    get max() {
-        return this.findMax();
+    //methods
+
+    evalIndex(ind) {
+
+        //initialize current node
+        let currentNode = this;
+        
+        //iterate until desired index reached
+        for (let currentInd = 0; currentInd<ind; currentInd++) {
+            
+            //error out if not enough elements, could avoid if we had a length class method
+            if (currentNode.next == null) {
+                console.log(`Index %d does not exist in this linked list`, ind);
+                return null
+            }
+
+            currentNode = currentNode.next;
+        }
+
+        return currentNode.value
     }
 
-    //method
+
     findMax(currentNode = this) {
 
         //end condition        
@@ -37,44 +54,44 @@ class ListNode {
 var LL1 = new ListNode(1, new ListNode(4, new ListNode(5, new ListNode(3))))
 var LL2 = new ListNode(7, new ListNode(1, new ListNode(5, new ListNode(1))))
 var LL3 = new ListNode(-1, new ListNode(-3, new ListNode(-5, new ListNode(0, new ListNode(-11)))))
+
 console.log(LL1.findMax()) // 5
 console.log(LL2.findMax()) // 7
 console.log(LL3.findMax()) // 0
 
-// function findMax(node) {
-//     //end condition        
-//     if (node.next == null) {
-//         return node.value;
+console.log(LL1.evalIndex(3)) // 3
+
+
+
+
+//NOTES//
+
+//not practical or particularly readable, just for fun
+// evalIndexRecursive(ind, currentNode = this, currentInd = 0) {
+
+//     //ind must be positive in this case
+
+//     //end condition
+//     if (currentInd == ind) {
+//         return currentNode.value
 //     }
-
-//     //define max val
-//     let maxVal = findMax(node.next);
-
-//     //if current val > maxVal, replace it
-//     if (node.value > maxVal) {
-//         // console.log("This value is ", this.value);
-//         return node.value;
-//     }      
-//     //otherwise don't
+//     //error condition: not enough elements in list
+//     else if (currentNode.next == null) {
+//         return console.error("Linked List is not long enough");
+//     } 
+//     //step into next node if currentInd < ind and increase currentInd by 1
 //     else {
-//         return maxValls
-
+//         return currentNode.evalIndexRecursive(ind, currentNode.next, currentInd = (currentInd+1))
 //     }
 // }
 
-// console.log(findMax(new ListNode(1))) // 1
+// var startTime1 = performance.now()
+// console.log(LL1.evalIndex(3)) // 5
+// var endTime1 = performance.now()
 
-//1. currentNode.findMax(this.next) -> WORKS
+// var startTime2 = performance.now()
+// console.log(LL1.evalIndexRecursive(3)) // 3
+// var endTime2 = performance.now()
 
-//        this = [1, 4, 5, 3]
-// currentNode = [1, 2, 3]
-
-// this = [1, 2, 3]
-// currentNode = [2, 3]
-
-// this [1, 2 ,3]
-// currentNode = [3]
-
-
-//2. this.findMax(currentNode.next) -> WORKS
-//3. this.findMax(this.next) -> DOESN'T WORK
+// console.log(`nonrecursive is ${(endTime1-startTime1)}`)
+// console.log(`recursive is ${(endTime2-startTime2)}`)
