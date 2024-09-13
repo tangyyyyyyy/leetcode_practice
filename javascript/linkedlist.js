@@ -57,7 +57,8 @@ console.log(LL3.findMax()) // 0
 //     }      
 //     //otherwise don't
 //     else {
-//         return maxVal
+//         return maxValls
+
 //     }
 // }
 
