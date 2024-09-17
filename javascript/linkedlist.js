@@ -67,6 +67,7 @@ console.log(LL1.evalIndex(3)) // 3
 //NOTES//
 
 //not practical or particularly readable, just for fun
+
 // evalIndexRecursive(ind, currentNode = this, currentInd = 0) {
 
 //     //ind must be positive in this case
